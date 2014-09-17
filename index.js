@@ -43,15 +43,9 @@ function post(request, response) {
 	var reqname = request.body.name;
 	var reqemail = request.body.email;
 	var newSessionId = login.login(reqname, reqemail);
-	var cookies = response.cookies;
-	console.log(newSessionId);
-	console.log(cookies);
-    if ('session_id' in cookies) {
-		cookies['session_id'] = newSessionId;
-    	response.end(login.hello(newSessionId));
-	}
-	else
- 		response.end("Please login via HTTP GET\n");
+	response.setHeader('Set-Cookie', 'session_id=' + newSessionId);
+	response.end(login.hello(newSessionId));	
+		
 };
 
 function del(request, response) {
