@@ -44,6 +44,8 @@ function post(request, response) {
 	var reqemail = request.body.email;
 	var newSessionId = login.login(reqname, reqemail);
 	var cookies = response.cookies;
+	console.log(newSessionId);
+	console.log(cookies);
     if ('session_id' in cookies) {
 		cookies['session_id'] = newSessionId;
     	response.end(login.hello(newSessionId));
