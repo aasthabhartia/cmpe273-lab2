@@ -69,9 +69,8 @@ function put(request, response) {
     var cookies = request.cookies;
     var sid = cookies['session_id'];
     if (login.isLoggedIn(sid)) {
-    	var reqname = request.body.name;
-		var reqemail = request.body.email;
-		var newSessionId = login.login(reqname, reqemail);
+   	  
+		var newSessionId = login.login(login.name,login.email);
 		response.setHeader('Set-Cookie', 'session_id=' + newSessionId);	
     	response.end("Re-freshed session id\n");
     }
